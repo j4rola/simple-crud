@@ -5,7 +5,7 @@ const app = express()
 const asyncHandler = require('express-async-handler')
 const jwt = require('jsonwebtoken')
 const connectDB = require('./config/db.js') 
-var cors = require('cors')
+var cors = require('cors')  
 
 app.use(cors())
 
