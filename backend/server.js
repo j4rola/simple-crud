@@ -38,7 +38,8 @@ app.post('/test-post', asyncHandler( async function(req, res) {
     res.json({
         "name": user.name, 
         "email": user.email,
-        "token": getJWT(4)
+        "token": getJWT(4),
+        "id": user.id
     }) 
     
     
