@@ -45,6 +45,32 @@ app.post('/test-post', asyncHandler( async function(req, res) {
     
 }))   
 
+app.post('/login', asyncHandler( async function(req, res) {      
+    
+    console.log('test')
+    const email = req.body.email
+    console.log(email)
+
+    const user = await User.findOne({email})       
+
+    if(user) {
+
+        res.json({
+
+            "name": user.name, 
+            "email": user.email, 
+            "token": getJWT(4), 
+            "id": user.id
+
+        }) 
+
+    }
+
+    
+    
+    
+})) 
+
 //Generate a JWT 
 const getJWT = (id) => {
     return jwt.sign({id}, process.env.JWT_SECRET, {  

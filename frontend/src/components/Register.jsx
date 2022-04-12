@@ -1,4 +1,4 @@
-import { createUser } from '../services/authService'
+import  authService  from '../services/authService'
 import {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -23,7 +23,7 @@ function Register() {
     const callCreateUser = (e) => {
         e.preventDefault()
         const userData = {name, email, password}
-        createUser(userData) 
+        authService.createUser(userData) 
         navigate('/')
     }
 
