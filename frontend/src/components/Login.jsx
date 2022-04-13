@@ -1,9 +1,12 @@
 import React from 'react'
 import authService from '../services/authService'
+import { useNavigate } from 'react-router-dom'
+
+
 
 function Login() {
 
-    
+    const navigate = useNavigate()  
 
     const creds = {
         email: '',
@@ -11,16 +14,24 @@ function Login() {
     } 
 
     const handleChange = (e) => {
-        e.preventDefault()
-        const value = e.target.name  
-        creds[value] = e.target.value
+        e.preventDefault()             
+        const value = e.target.name    
+        creds[value] = e.target.value   
 
         console.log(creds) 
     }
 
     async function  login (creds) {
         //e.preventDefault()
-        await authService.login(creds)    
+        try { 
+        await authService.login(creds) 
+        navigate('/') 
+    }   catch(err)
+    
+    {
+        console.log(err)
+        alert(err)}
+          
     }
 
 

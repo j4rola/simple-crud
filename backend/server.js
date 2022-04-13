@@ -1,11 +1,13 @@
 require('dotenv').config()
 const User = require('./models/userModel.js')
+const Item = require('./models/itemModel.js')
 const express = require('express') 
 const app = express() 
 const asyncHandler = require('express-async-handler')
 const jwt = require('jsonwebtoken')
 const connectDB = require('./config/db.js') 
 var cors = require('cors')  
+const { errorHandler } = require('./middleware/errorHandler')
 
 app.use(cors())
 
@@ -20,7 +22,7 @@ app.get('/', function (req, res) {
   res.send('Hello World!')              
 }) 
 
-app.post('/test-post', asyncHandler( async function(req, res) {        
+app.post('/register', asyncHandler( async function(req, res) {        
 
     console.log(req.body)       
     //console.log(req.body)          
@@ -36,40 +38,98 @@ app.post('/test-post', asyncHandler( async function(req, res) {
 
 
     res.json({
+
         "name": user.name, 
         "email": user.email,
         "token": getJWT(4),
         "id": user.id
+
     }) 
     
     
 }))   
 
-app.post('/login', asyncHandler( async function(req, res) {      
+app.post('/login', asyncHandler( async function(req, res, next) {      
     
     console.log('test')
     const email = req.body.email
+    const password = req.body.password
     console.log(email)
 
-    const user = await User.findOne({email})       
+    const user = await User.findOne({ email })       
 
-    if(user) {
+    if(user && password === user.password) {
 
         res.json({
 
             "name": user.name, 
             "email": user.email, 
             "token": getJWT(4), 
-            "id": user.id
+            "id": user.id  
 
         }) 
 
-    }
+    } else {
+        
+    try{ throw new Error('The username and password combination you have entered is invalid')}
+    catch (err){ next(err)} }
+
+}))
+
+app.post('/create-item', asyncHandler( async function(req, res) {        
+
+    console.log(req.body)       
+    //console.log(req.body)          
+
+    const item = await Item.create({
+
+        title: req.body.title,
+        notes: req.body.notes,
+        user: req.body.id
+         
+        
+    }) 
+
+
+    // res.json({
+
+    //     "name": user.name, 
+    //     "email": user.email,
+    //     "token": getJWT(4),
+    //     "id": user.id
+
+    // }) 
+    
+    
+}))   
+
+//Get all Items
+
+app.get('/get-items', asyncHandler( async function(req, res) {        
+
+    console.log(req.body)       
+    //console.log(req.body)   
+    
+    const user = req.body.user
+
+    const item = await Item.findById({ user }) 
+
+    console.log(item)
+    // res.json({
+
+    //     "name": user.name, 
+    //     "email": user.email,
+    //     "token": getJWT(4),
+    //     "id": user.id
+
+    // }) 
+    
+    
+}))   
+    
 
     
-    
-    
-})) 
+ 
 
 //Generate a JWT 
 const getJWT = (id) => {
@@ -78,6 +138,6 @@ const getJWT = (id) => {
     })    
 }   
 
-
+//app.use(errorHandler())
 
 app.listen(8000) 

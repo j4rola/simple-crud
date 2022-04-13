@@ -2,7 +2,7 @@ const axios = require('axios').default;
 
 async function createUser(input) {    
     //e.preventDefault()    
-    const response = await axios.post('http://localhost:8000/test-post', input)   
+    const response = await axios.post('http://localhost:8000/register', input)   
     console.log(response.data)     
     localStorage.setItem('user', JSON.stringify(response.data))   
 }

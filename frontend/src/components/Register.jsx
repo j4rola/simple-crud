@@ -20,11 +20,11 @@ function Register() {
         
     }
 
-    const callCreateUser = (e) => {
+    async function callCreateUser(e){
         e.preventDefault()
         const userData = {name, email, password}
-        authService.createUser(userData) 
-        navigate('/')
+        await authService.createUser(userData) 
+        navigate('/') 
     }
 
 
