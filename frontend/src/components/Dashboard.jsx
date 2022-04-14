@@ -2,17 +2,18 @@ import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import itemService from '../services/itemService' 
-import Item from './Item'
+import Item from './Item' 
+
 
 function Dashboard() {  
 
 
-    //logout
-    const navigate = useNavigate() 
+    //logout     
+    const navigate = useNavigate()      
 
     const user = useState(JSON.parse(localStorage.getItem('user')))
-    const name = user[0].name
-    const userId = user[0].id
+    const name = user[0].name     
+    const userId = user[0].id     
 
     const logout = () => {
         
@@ -33,13 +34,15 @@ function Dashboard() {
         e.preventDefault()
         const value = e.target.name    
         inputVal[value] = e.target.value    
-        console.log(inputVal)
+        console.log(inputVal)   
     }
 
     async function createItem(inputVal){
         itemService.createItem(inputVal)
         console.log(inputVal)
     }
+
+    
      
 
   return (    
@@ -52,7 +55,7 @@ function Dashboard() {
                 <textarea onChange={handleChange} name="notes" placeholder='Notes'></textarea> 
             </form>
             <button onClick={() => createItem(inputVal)}>Create</button>
-            <Item userId={userId}/> 
+            <Item userId={userId}/>
             
         </div>   
         

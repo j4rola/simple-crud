@@ -7,7 +7,8 @@ const asyncHandler = require('express-async-handler')
 const jwt = require('jsonwebtoken')
 const connectDB = require('./config/db.js') 
 var cors = require('cors')  
-const { errorHandler } = require('./middleware/errorHandler')
+const {guard} = require('./middleware/Guard')
+
 
 app.use(cors())
 
@@ -76,7 +77,7 @@ app.post('/login', asyncHandler( async function(req, res, next) {
 
 }))
 
-app.post('/create-item', asyncHandler( async function(req, res) {        
+app.post('/create-item',  asyncHandler( async function(req, res) {        
 
     console.log(req.body)       
     //console.log(req.body)          
@@ -87,7 +88,6 @@ app.post('/create-item', asyncHandler( async function(req, res) {
         notes: req.body.notes,
         user: req.body.id
          
-        
     }) 
 
 
@@ -105,25 +105,18 @@ app.post('/create-item', asyncHandler( async function(req, res) {
 
 //Get all Items
 
-app.get('/get-items', asyncHandler( async function(req, res) {        
+app.get('/get-items', guard, asyncHandler( async function(req, res) {        
 
-    console.log(req.body)       
-    //console.log(req.body)   
+    console.log(req.params)         
     
-    const user = req.body.user
+    const user = req.body.user  
+    console.log(user)
+    const items = await Item.findOne( {user: user }) 
 
-    const item = await Item.findById({ user }) 
-
-    console.log(item)
-    // res.json({
-
-    //     "name": user.name, 
-    //     "email": user.email,
-    //     "token": getJWT(4),
-    //     "id": user.id
-
-    // }) 
-    
+    //console.log(...items)   
+     
+    console.log(items)  
+    res.json(items) 
     
 }))   
     
