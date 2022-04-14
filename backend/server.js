@@ -65,8 +65,8 @@ app.post('/login', asyncHandler( async function(req, res, next) {
 
             "name": user.name, 
             "email": user.email, 
-            "token": getJWT(4), 
-            "id": user.id  
+            "token": getJWT(user.id), 
+            "_id": user.id  
 
         }) 
 
@@ -105,13 +105,11 @@ app.post('/create-item',  asyncHandler( async function(req, res) {
 
 //Get all Items
 
-app.get('/get-items', guard, asyncHandler( async function(req, res) {        
-
-    console.log(req.params)         
+app.get('/get-items', guard, asyncHandler( async function(req, res) {               
     
-    const user = req.body.user  
+    const user = req.user.id 
     console.log(user)
-    const items = await Item.findOne( {user: user }) 
+    const items = await Item.find({user: user }) 
 
     //console.log(...items)   
      

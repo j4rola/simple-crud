@@ -12,13 +12,13 @@ async function getItems(token) {
     console.log(token)
     const config = {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,    
         }  
     }
 
     const response = await axios.get('http://localhost:8000/get-items', config);
     
-    console.log(response);
+    return response
     
 }  
 

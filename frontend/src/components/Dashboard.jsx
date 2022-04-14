@@ -11,9 +11,10 @@ function Dashboard() {
     //logout     
     const navigate = useNavigate()      
 
-    const user = useState(JSON.parse(localStorage.getItem('user')))
-    const name = user[0].name     
-    const userId = user[0].id     
+    const user = JSON.parse(localStorage.getItem('user'))
+    console.log(`user: ${JSON.stringify(user)}`)
+    const name = user.name     
+    const userId = user._id     
 
     const logout = () => {
         
