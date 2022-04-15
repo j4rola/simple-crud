@@ -8,20 +8,22 @@ function Item() {
 
      
     const [listItems, updateItems] = useState('') 
-    const user = JSON.parse(localStorage.getItem('user'))   
-    const token = user.token  
+     
 
     useEffect(
         () => {
             async function getItems() { 
-        
+                
+                const user = JSON.parse(localStorage.getItem('user'))   
+                const token = user.token 
+
                 const items = await itemService.getItems(token) 
-                console.log(items)   
+                console.log(items)       
                 updateItems(items) 
             } 
 
             getItems()  
-        }, [token]
+        }, []
 
     )       
         
@@ -45,10 +47,10 @@ function Item() {
     //getItems()
 
   return (
-    <div>Item  
+    <div>Item       
         
           
-        <p>{listItems.data[0].title}</p>   
+       {listItems && <p>{listItems.data[0].title}</p>}   
         <p>test</p>   
     </div>          
 )}
