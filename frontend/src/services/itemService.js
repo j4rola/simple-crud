@@ -9,7 +9,7 @@ async function createItem(input) {
 
 async function getItems(token) {
     
-    console.log(token)
+    console.log(token)  
     const config = {
         headers: {
           Authorization: `Bearer ${token}`,    

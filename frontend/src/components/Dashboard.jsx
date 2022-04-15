@@ -56,7 +56,7 @@ function Dashboard() {
                 <textarea onChange={handleChange} name="notes" placeholder='Notes'></textarea> 
             </form>
             <button onClick={() => createItem(inputVal)}>Create</button>
-            <Item userId={userId}/>
+            <Item/>
             
         </div>   
         

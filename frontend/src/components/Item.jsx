@@ -1,29 +1,55 @@
-import React from 'react'
-import itemService from '../services/itemService'
-import useState from 'react'
+import React from 'react' 
+import itemService from '../services/itemService' 
+import {useState, useEffect} from 'react' 
 
-function Item() {
+ 
 
-   // const [items, updateItems] = useState([])
+function Item() {   
 
-    const user = JSON.parse(localStorage.getItem('user'))
-    console.log(user) 
-    console.log(user.token)  
-    const token = user.token   
-    
+     
+    const [listItems, updateItems] = useState('') 
+    const user = JSON.parse(localStorage.getItem('user'))   
+    const token = user.token  
 
-    async function getItems(token) {                       
-        const items = await itemService.getItems(token)  
-        console.log(items)
-        //updateItems(items.data)     
-        return items   
-    } 
+    useEffect(
+        () => {
+            async function getItems() { 
+        
+                const items = await itemService.getItems(token) 
+                console.log(items)   
+                updateItems(items) 
+            } 
 
-    getItems(token)
+            getItems()  
+        }, [token]
+
+    )       
+        
+    console.log(listItems)        
+
+    // async function getItems() {         
+        
+    //     const user = JSON.parse(localStorage.getItem('user'))   
+    //     const token = user.token
+
+    //     const items = await itemService.getItems(token)  
+    //     updateItems(items.data)
+    //     //console.log(items.data[0].title) 
+    //     //userItems.push(items.data[0].title)
+    //    // items.data.map(x => userItems.push(x.title))
+    //     //updateItems(items.data)    
+    //     console.log(listItems)  
+    //     return items   
+    // } 
+
+    //getItems()
 
   return (
-    <div>Item    
-        <p></p> 
+    <div>Item  
+        
+          
+        <p>{listItems.data[0].title}</p>   
+        <p>test</p>   
     </div>          
 )}
 
