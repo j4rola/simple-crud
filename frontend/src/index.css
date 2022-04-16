@@ -27,3 +27,14 @@ form {
   align-items: center;
   justify-content: center;
 }
+
+#close {
+  color: darkred;
+  cursor: pointer;
+}
+
+#item {
+  border: 1px solid black;
+  border-radius: 15px;
+  margin: 10px 0px 10px 0px;
+}

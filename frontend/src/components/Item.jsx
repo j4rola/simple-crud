@@ -27,31 +27,11 @@ function Item() {
              
         }, []    
 
-    )       
-        
-    //console.log(listItems)        
-
-    // async function getItems() {         
-        
-    //     const user = JSON.parse(localStorage.getItem('user'))   
-    //     const token = user.token
-
-    //     const items = await itemService.getItems(token)  
-    //     updateItems(items.data)
-    //     //console.log(items.data[0].title) 
-    //     //userItems.push(items.data[0].title)
-    //    // items.data.map(x => userItems.push(x.title))
-    //     //updateItems(items.data)    
-    //     console.log(listItems)  
-    //     return items   
-    // } 
-
-    //getItems()
-
+    )         
+    
   return (
-    <div>Item       
-       {listItems && listItems.data.map(x => <div><h4>{x.title}</h4><p>{x.notes}</p></div>)}   
-        <p>test</p>       
+    <div>
+       {listItems && listItems.data.map(x => <div id="item"><h4>{x.title} <span id="close">x</span></h4><p>{x.notes}</p></div>)}         
     </div>          
 )}
 
