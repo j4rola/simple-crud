@@ -8,8 +8,8 @@ function Item() {
 
      
     const [listItems, updateItems] = useState('') 
-     
 
+    
     useEffect(
         () => {
             async function getItems() { 
@@ -20,14 +20,16 @@ function Item() {
                 const items = await itemService.getItems(token) 
                 console.log(items)       
                 updateItems(items) 
+
             } 
 
-            getItems()  
-        }, []
+            getItems() 
+             
+        }, []    
 
     )       
         
-    console.log(listItems)        
+    //console.log(listItems)        
 
     // async function getItems() {         
         
@@ -48,10 +50,8 @@ function Item() {
 
   return (
     <div>Item       
-        
-          
-       {listItems && <p>{listItems.data[0].title}</p>}   
-        <p>test</p>   
+       {listItems && listItems.data.map(x => <div><h4>{x.title}</h4><p>{x.notes}</p></div>)}   
+        <p>test</p>       
     </div>          
 )}
 

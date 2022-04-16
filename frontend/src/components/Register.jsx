@@ -13,7 +13,7 @@ function Register() {
     const {name, email, password} = input 
 
     const onFormChange = (e) => {
-        updateInput((prevState) => ({
+        updateInput((prevState) => ({ 
             ...prevState,
             [e.target.name]: e.target.value  
         }))

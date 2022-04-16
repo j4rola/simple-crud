@@ -1,5 +1,5 @@
 import React from 'react' 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import itemService from '../services/itemService' 
 import Item from './Item' 
@@ -43,8 +43,6 @@ function Dashboard() {
         console.log(inputVal)
     }
 
-    
-     
 
   return (    
     <div >Welcome to your Dashboard {name}!  
@@ -54,8 +52,9 @@ function Dashboard() {
             <form action="">
                 <input onChange={handleChange} name="title" placeholder='Title'></input>
                 <textarea onChange={handleChange} name="notes" placeholder='Notes'></textarea> 
+                <button onClick={() => createItem(inputVal)}>Create</button>
             </form>
-            <button onClick={() => createItem(inputVal)}>Create</button>
+            
             <Item/>
             
         </div>   
