@@ -39,15 +39,15 @@ function Login() {
     
 
   return (
-    <div>Login
-        <form action="">
-            <input type="text" onChange={handleChange} name='email' placeholder='email' />
-            <input type="text" onChange={handleChange} name='password' placeholder='password'/>
+    <div>Login    
+        <form action="">      
+            <input type="text" onChange={handleChange} name='email' placeholder='email' />   
+            <input type="text" onChange={handleChange} name='password' placeholder='password'/>   
         </form>
-        <button onClick={() => login(creds)}>Login</button>   
+        <button onClick={() => login(creds)}>Login</button>         
 
     </div>
   )
 }
 
-export default Login
+export default Login   

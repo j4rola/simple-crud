@@ -22,9 +22,25 @@ async function getItems(token) {
     
 }  
 
+async function deleteItem(token, id) {
+
+    const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,    
+        }   
+    }  
+
+    console.log(token)
+
+    await axios.delete(`http://localhost:8000/delete-item-${id}`, config)
+    
+    console.log(id) 
+}
+
 const itemService = {
     createItem,
-    getItems
+    getItems,
+    deleteItem
 }
 
 export default itemService 

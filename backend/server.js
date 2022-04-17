@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken')
 const connectDB = require('./config/db.js') 
 var cors = require('cors')  
 const {guard} = require('./middleware/Guard')
+const { findById } = require('./models/userModel.js')
 
 
 app.use(cors())
@@ -109,7 +110,7 @@ app.get('/get-items', guard, asyncHandler( async function(req, res) {
     
     const user = req.user.id 
     console.log(user)
-    const items = await Item.find({user: user }) 
+    const items = await Item.find({user: user })   
 
     //console.log(...items)   
      
@@ -117,6 +118,18 @@ app.get('/get-items', guard, asyncHandler( async function(req, res) {
     res.json(items) 
     
 }))   
+
+//Delete item 
+
+app.delete('/delete-item-:id', guard, asyncHandler(
+    
+    async function(req, res) {
+        const id = req.params.id
+        const item = await Item.findById(id)
+        await Item.remove(item) 
+    }
+    
+))
     
 
     
