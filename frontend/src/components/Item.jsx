@@ -1,18 +1,22 @@
 import React from 'react' 
 import itemService from '../services/itemService' 
 import {useState, useEffect} from 'react' 
-import { useNavigate } from 'react-router-dom'
+import List from '../components/List'
+
 
 
 
  
 
-function Item() {
+function Item() {  
+
     
-    const navigate = useNavigate()      
 
     const [listItems, updateItems] = useState('') 
-    const [isUpdated, updateStatus] = useState(true)
+    
+    console.log({listItems})     
+    
+
 
     //get items
     useEffect(
@@ -23,8 +27,9 @@ function Item() {
                 const token = user.token  
 
                 const items = await itemService.getItems(token) 
-                console.log(items)           
-                updateItems(items)      
+                 
+                console.log(items.data)           
+                updateItems(items.data)      
 
             } 
 
@@ -32,7 +37,9 @@ function Item() {
              
         }, []    
 
-    )         
+    )      
+    
+    
   
 
     //delete item 
@@ -41,19 +48,29 @@ function Item() {
         const user = JSON.parse(localStorage.getItem('user'))   
         const token = user.token
 
-        const id = e.target.parentNode.id  
-        const test = listItems.data.filter(x => x.id !== id)
-        console.log(test)
-        //updateItems(...listItems,  )  
-        await itemService.deleteItem(token, id)  
-
+        const id = e.target.parentNode.id    
         
-    }
+        const newItems = listItems  
+         
+        const filtered = newItems.filter(x => x._id !== id) 
+       
+        console.log(`aksdj = ${filtered}`) 
+          
+        updateItems(items => items.filter(x => x._id !== id))
+        await itemService.deleteItem(token, id)   
+
+        //updateItems([...filtered])
+                                  
+
+    } 
+ 
     
   return (
     <div>
-       {listItems && listItems.data.map(x => <div className="item" id={x._id}><h4>{x.title}</h4><span onClick={(e) => deleteItem(e)} id="close">x</span><p>{x.notes}</p></div>)}         
-    </div>            
+       {listItems && listItems?.map(x => <div className="item" id={x._id}><h4>{x.title}</h4><span onClick={(e) => deleteItem(e)} id="close">x</span><p>{x.notes}</p></div>)} 
+       <List/>        
+    </div>         
+      
 )}
 
 export default Item  
