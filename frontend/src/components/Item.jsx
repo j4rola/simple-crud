@@ -52,8 +52,9 @@ function Item() {
     
   return (
     <div>
-       {listItems && listItems?.map(x => <div className="item" id={x._id}><h3>{x.title}<span onClick={(e) => deleteItem(e)} id="close">x</span></h3><p>{x.notes}</p></div>)} 
-    </div>         
+       {listItems ? listItems?.map(x => <div className="item" id={x._id}><h3>{x.title}<span onClick={(e) => deleteItem(e)} id="close">x</span></h3><p>{x.notes}</p></div>) : <h1>Loading...</h1>} 
+       {listItems.length > 0 ? "" : <p>You have not created any list items.</p>}
+    </div>      
       
 )}
 
