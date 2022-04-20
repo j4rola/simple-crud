@@ -40,7 +40,7 @@ function Dashboard() {
     async function createItem(inputVal){
         itemService.createItem(inputVal)
         console.log(inputVal)
-    }
+    }        
 
 
   return (    

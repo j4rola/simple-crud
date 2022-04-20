@@ -23,8 +23,7 @@ function Item() {
                 const token = user.token  
 
                 const items = await itemService.getItems(token) 
-                 
-                console.log(items.data)           
+                           
                 updateItems(items.data)      
 
             } 

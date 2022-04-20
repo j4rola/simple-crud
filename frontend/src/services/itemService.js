@@ -30,11 +30,8 @@ async function deleteItem(token, id) {
         }   
     }  
 
-    console.log(token)
-
     await axios.delete(`http://localhost:8000/delete-item-${id}`, config)
     
-    console.log(id) 
 }
 
 const itemService = {

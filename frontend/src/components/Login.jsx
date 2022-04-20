@@ -41,8 +41,8 @@ function Login() {
   return (
     <div>Login    
         <form action="">      
-            <input type="text" onChange={handleChange} name='email' placeholder='email' />   
-            <input type="text" onChange={handleChange} name='password' placeholder='password'/>   
+            <input required type="text" onChange={handleChange} name='email' placeholder='email' />   
+            <input required type="text" onChange={handleChange} name='password' placeholder='password'/>   
         </form>
         <button onClick={() => login(creds)}>Login</button>         
 
