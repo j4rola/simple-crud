@@ -1,5 +1,4 @@
 import React from 'react' 
-import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import itemService from '../services/itemService' 
 import Item from './Item' 
@@ -45,14 +44,14 @@ function Dashboard() {
 
 
   return (    
-    <div >Welcome to your Dashboard {name}!  
+    <div><h3>Welcome to your Dashboard {name}!</h3>  
         <button onClick={logout}>Logout</button>  
         <div id='item-wrapper'>
             <h4>Create List Item</h4> 
             <form action="">
-                <input onChange={handleChange} name="title" placeholder='Title'></input>
-                <textarea onChange={handleChange} name="notes" placeholder='Notes'></textarea> 
-                <button onClick={() => createItem(inputVal)}>Create</button>
+                <input required onChange={handleChange} name="title" placeholder='Title'></input>
+                <textarea required onChange={handleChange} id="ta" name="notes" placeholder='Notes'></textarea> 
+                <button onClick={() => createItem(inputVal)}>Create</button> 
             </form>
             
             <Item/>
