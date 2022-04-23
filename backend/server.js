@@ -99,7 +99,7 @@ app.post('/create-item',  asyncHandler( async function(req, res) {
         title: req.body.title,
         notes: req.body.notes,
         user: req.body.id,
-        completed: 'lightgray'
+        status: 'lightgray'
         
     }) 
 

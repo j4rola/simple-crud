@@ -12,8 +12,7 @@ function Item() {
 
     
 
-    const [listItems, updateItems] = useState('')  
-    const [status, updateStatus] = useState('')    
+    const [listItems, updateItems] = useState('')   
     
     //get items
     useEffect(
@@ -50,20 +49,18 @@ function Item() {
 
     } 
 
-    async function markStarted (e) {
+    async function toggleStatus (e) {
         const id = e.target.parentNode.id
-        e.target.parentNode.style.border = 'orange solid 1px'
-        await itemService.markStarted(id) 
-    }
-
-    function markDone (e) {
-        e.target.parentNode.style.border = 'green solid 1px' 
+        const color = e.target
+        e.target.parentNode.style.border = `${color.name} solid 1px`
+        console.log(color.name)
+        await itemService.toggleStatus(id, color.name) 
     }
  
     
   return (
     <div>
-       {listItems ? listItems?.map(x => <div style={{border: `solid 1px ${x.completed}` }} className="item" id={x._id}><h3>{x.title}<span onClick={(e) => deleteItem(e)} id="close">X</span></h3><p>{x.notes}</p><button id="started" onClick={(e) => markStarted(e)}>Mark Started</button><button id="done" onClick={(e) => markDone(e)}>Mark Done</button></div>) : <h1>Loading...</h1>} 
+       {listItems ? listItems?.map(x => <div style={{border: `solid 1px ${x.status}` }} className="item" id={x._id}><h3>{x.title}<span onClick={(e) => deleteItem(e)} id="close">X</span></h3><p>{x.notes}</p><button name="orange" id="started" onClick={(e) => toggleStatus(e)}>Mark Started</button><button name="green" id="done" onClick={(e) => toggleStatus(e)}>Mark Done</button></div>) : <h1>Loading...</h1>} 
        {listItems.length > 0 ? "" : <p>You have not created any list items.</p>}    
     </div>      
       

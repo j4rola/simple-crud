@@ -22,9 +22,9 @@ async function getItems(token) {
     
 }  
 
-async function markStarted(id) {
+async function toggleStatus(id, color) {
     console.log(id)
-    await axios.put(`http://localhost:8000/put-item${id}`, {completed: 'orange'}) 
+    await axios.put(`http://localhost:8000/put-item${id}`, {status: color}) 
 }
 
 async function deleteItem(token, id) {
@@ -43,7 +43,7 @@ const itemService = {
     createItem,
     getItems,
     deleteItem,
-    markStarted
+    toggleStatus
 }
 
 export default itemService 
