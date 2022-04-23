@@ -4,7 +4,7 @@ async function createItem(input) {
         
     const response = await axios.post('http://localhost:8000/create-item', input)   
     console.log(response.data)     
-    localStorage.setItem('user', JSON.stringify(response.data))   
+    localStorage.setItem('user', JSON.stringify(response.data))    
 } 
 
 async function getItems(token) {
@@ -12,7 +12,7 @@ async function getItems(token) {
     console.log(token)  
     const config = {
         headers: {
-          Authorization: `Bearer ${token}`,    
+          Authorization: `Bearer ${token}`,       
         }  
     }
 
@@ -21,6 +21,11 @@ async function getItems(token) {
     return response
     
 }  
+
+async function markStarted(id) {
+    console.log(id)
+    await axios.put(`http://localhost:8000/put-item${id}`, {completed: 'orange'}) 
+}
 
 async function deleteItem(token, id) {
 
@@ -37,7 +42,8 @@ async function deleteItem(token, id) {
 const itemService = {
     createItem,
     getItems,
-    deleteItem
+    deleteItem,
+    markStarted
 }
 
 export default itemService 

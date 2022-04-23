@@ -46,12 +46,21 @@ form {
   margin: 10px;
   position: relative;
   z-index: 2;
-  
 }
 
 .item {
-  border: 1px solid lightgray;
-  border-radius: 15px;
-  margin: 20px 0px 10px 0px;
+  border: 1px solid lightgray;   
+  border-radius: 15px;   
+  margin: 20px 0px 10px 0px;   
   padding: 20px;   
 }
+
+#started {
+  margin: 5px;
+}
+
+#done {
+  margin: 5px;
+}
+
+

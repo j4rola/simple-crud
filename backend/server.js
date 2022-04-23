@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken')
 const connectDB = require('./config/db.js') 
 var cors = require('cors')  
 const {guard} = require('./middleware/Guard')
-const { findById } = require('./models/userModel.js')
+const { findById, update } = require('./models/userModel.js')
 
 
 app.use(cors())
@@ -53,10 +53,10 @@ app.post('/register', asyncHandler( async function(req, res) {
 
 app.post('/login', asyncHandler( async function(req, res, next) {      
     
-    console.log('test')
-    const email = req.body.email
-    const password = req.body.password
-    console.log(email)
+    console.log('test')  
+    const email = req.body.email  
+    const password = req.body.password       
+    console.log(email)  
 
     const user = await User.findOne({ email })       
 
@@ -73,8 +73,19 @@ app.post('/login', asyncHandler( async function(req, res, next) {
 
     } else {
         
-    try{ throw new Error('The username and password combination you have entered is invalid')}
+    try { throw new Error('The username and password combination you have entered is invalid')}
     catch (err){ next(err)} }
+
+})) 
+
+app.put('/put-item:id', asyncHandler(async function(req, res) { 
+
+    console.log(req.params.id)   
+    const updatedItem = await Item.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+    })
+    
+    res.json(updatedItem)
 
 }))
 
@@ -83,12 +94,13 @@ app.post('/create-item',  asyncHandler( async function(req, res) {
     console.log(req.body)       
     //console.log(req.body)          
 
-    const item = await Item.create({
+    const item = await Item.create({   
 
         title: req.body.title,
         notes: req.body.notes,
-        user: req.body.id
-         
+        user: req.body.id,
+        completed: 'lightgray'
+        
     }) 
 
 
@@ -109,7 +121,7 @@ app.post('/create-item',  asyncHandler( async function(req, res) {
 app.get('/get-items', guard, asyncHandler( async function(req, res) {               
     
     const user = req.user.id 
-    console.log(user)
+    console.log(user) 
     const items = await Item.find({user: user })   
 
     //console.log(...items)   

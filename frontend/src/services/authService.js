@@ -11,7 +11,7 @@ async function login(creds) {
 
     const response = await axios.post('http://localhost:8000/login', creds)
 
-    console.log(response.data)
+    console.log(response.data)    
 
     if(response.data){ 
 

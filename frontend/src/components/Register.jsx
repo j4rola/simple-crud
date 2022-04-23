@@ -22,7 +22,7 @@ function Register() {
 
     async function callCreateUser(e){
         e.preventDefault()
-        const userData = {name, email, password}
+        const userData = {name, email, password}  
         await authService.createUser(userData) 
         navigate('/') 
     }
@@ -31,11 +31,10 @@ function Register() {
   return (
     <div>Register
         <form onSubmit={callCreateUser}> 
-            <input onChange={(e) => onFormChange(e)} value={name} name="name" type="text" placeholder="name"/>
-            <input onChange={(e) => onFormChange(e)} value={email} name="email" type="text" placeholder="email"/>
-            <input onChange={(e) => onFormChange(e)} value={password} name="password" type="text" placeholder="password"/>
+            <input required onChange={(e) => onFormChange(e)} value={name} name="name" type="text" placeholder="name"/>
+            <input required onChange={(e) => onFormChange(e)} value={email} name="email" type="text" placeholder="email"/>
+            <input required onChange={(e) => onFormChange(e)} value={password} name="password" type="text" placeholder="password"/>
             <button type='submit'>Submit</button>
-            <p>{name}</p>
         </form>
         
 

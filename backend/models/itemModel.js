@@ -10,6 +10,10 @@ const itemSchema = mongoose.Schema({
         required: [true, "Please add a value for notes"],  
         unique: true  
     },
+    completed: {
+        type: String,
+
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
